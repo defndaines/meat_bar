@@ -14,7 +14,7 @@ defmodule MeatBar.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger],
+    [applications: [:logger, :maru],
      mod: {MeatBar, []}]
   end
 
@@ -28,6 +28,7 @@ defmodule MeatBar.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:maru, "~> 0.10.4"},
+     {:csv, "~> 1.4.2"}]
   end
 end
