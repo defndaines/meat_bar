@@ -2,8 +2,47 @@
 
 *Meat Bar Consumption Analytics*
 
-Simple REST-like service to tracking and analyzing [Meat Bar](http://)
-consumption by registered users.
+Simple REST-like service for tracking and analyzing
+[Meat Bar](https://epicbar.com/) consumption by registered users.
+
+## Development
+
+This project is written in Elixir. In order to build and run it, you will need
+to install [Elixir](http://elixir-lang.org/install.html). On Mac OS X, if you
+have homebrew installed, this can be done with:
+```
+brew install elixir
+```
+
+To load dependencies and compile the project:
+```
+mix deps.get
+mix compile
+```
+
+To create the SQLite databse:
+```
+mix ecto.create
+```
+
+### To Run Tests
+
+Run tests from the root directory with:
+```
+mix test
+```
+
+### Running Locally
+
+To launch the application along with an interactive shell:
+```
+iex -S mix
+```
+
+This should expose endpoints such as:
+```
+curl http://127.0.0.1:8282/people
+```
 
 ## Installation
 
