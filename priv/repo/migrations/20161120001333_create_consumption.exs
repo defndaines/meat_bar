@@ -3,11 +3,9 @@ defmodule MeatBar.Repo.Migrations.CreateConsumption do
 
   def change do
     create table(:consumption) do
-      add :people_id, references(:people)
+      add :person_id, references(:person)
       add :type, :string
       add :date, :datetime
-
-      timestamps
     end
   end
 end

@@ -24,6 +24,7 @@ To create the SQLite database and load the table definitions:
 ```
 mix ecto.create
 mix ecto.migrate
+sqlite3 meat_bar.sqlite3 .schema
 ```
 
 ### To Run Tests
