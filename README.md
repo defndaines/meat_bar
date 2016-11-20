@@ -20,9 +20,10 @@ mix deps.get
 mix compile
 ```
 
-To create the SQLite databse:
+To create the SQLite database and load the table definitions:
 ```
 mix ecto.create
+mix ecto.migrate
 ```
 
 ### To Run Tests
