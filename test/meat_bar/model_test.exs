@@ -18,13 +18,14 @@ defmodule MeatBar.ModelTest do
   test "data models are wired up correctly" do
     # Insert a new person
     {:ok, person} = Repo.insert(%Person{name: "daines"})
-    ["daines"] = Person |> select([person], person.name) |> Repo.all
+    person_list = Person |> select([person], person.name) |> Repo.all
+    assert Enum.find(person_list, &(&1 == "daines"))
 
     # Can insert a new consumption
     {:ok, bison_time} = Ecto.DateTime.cast("2015-01-08T09:00:00.000Z")
-    Repo.insert(%Consumption{person_id: person.id, type: "bison", date: bison_time})
+    {:ok, bison} = Repo.insert(%Consumption{person_id: person.id, type: "bison", date: bison_time})
     {:ok, lamb_time} = Ecto.DateTime.cast("2015-01-09T10:00:00.000Z")
-    Repo.insert(%Consumption{person_id: person.id, type: "lamb", date: lamb_time})
+    {:ok, lamb} = Repo.insert(%Consumption{person_id: person.id, type: "lamb", date: lamb_time})
     assert ["bison", "lamb"] == Consumption
                               |> select([consumption], consumption.type)
                               |> where([consumption], consumption.person_id == ^person.id)
@@ -38,5 +39,10 @@ defmodule MeatBar.ModelTest do
             |> List.flatten
             |> Enum.map(fn(ate) -> ate.type end)
     assert ["bison", "lamb"] == types
+
+    # Clean up the records created by this test
+    Repo.delete(bison)
+    Repo.delete(lamb)
+    Repo.delete(person)
   end
 end

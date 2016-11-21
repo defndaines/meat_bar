@@ -5,6 +5,6 @@ defmodule MeatBar.DataImportTest do
   test "reads data from provided file" do
     filename = "test/data.csv"
 
-    MeatBar.DataImport.load(filename, fn(%{"person" => person, "meat-bar-type" => type, "date" => date}) -> IO.puts("#{person},#{type},#{date}") end)
+    MeatBar.DataImport.load(filename, &MeatBar.DataImport.push_record/1)
   end
 end
