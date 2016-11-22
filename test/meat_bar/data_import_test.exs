@@ -5,6 +5,7 @@ defmodule MeatBar.DataImportTest do
   test "reads data from provided file" do
     filename = "test/data.csv"
 
-    MeatBar.DataImport.load(filename, &MeatBar.DataImport.push_record/1)
+    MeatBar.DataImport.load(filename, &MeatBar.Store.track_consumption/1)
+    assert ["ashton", "bob", "chuck"] = MeatBar.Store.all_people()
   end
 end

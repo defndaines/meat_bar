@@ -1,37 +1,36 @@
 defmodule MeatBar.API do
   use Maru.Router
 
-  import Ecto.Query
-
   @moduledoc """
   Defines the routes supported by this application.
   """
 
+  before do
+    plug Plug.Parsers,
+    pass: ["*/*"],
+    json_decoder: Poison,
+    parsers: [:urlencoded, :json, :multipart]
+  end
+
   namespace :people do
     get do
-      persons = MeatBar.Person
-                |> select([person], person.name)
-                |> MeatBar.Repo.all
-      json(conn, persons)
+      json(conn, MeatBar.Store.all_people())
     end
   end
 
   namespace :consumption do
     get do
-      query = from c in MeatBar.Consumption,
-              join: p in MeatBar.Person,
-              order_by: c.date,
-              select: %{person: p.name, type: c.type, date: c.date}
-      consumed = MeatBar.Repo.all(query)
-      json(conn, consumed)
+      json(conn, MeatBar.Store.all_consumption())
     end
 
     params do
-      requires :name, type: String
-      requires :type, type: String
-      requires :date, type: String
+      requires "person", type: String
+      requires "meat-bar-type", type: String
+      requires "date", type: String
     end
     post do
+      {:ok, _} = MeatBar.Store.track_consumption(params)
+      conn |> put_status(204) |> json([])
     end
   end
 
