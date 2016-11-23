@@ -100,7 +100,7 @@ Record a new Meat Bar consumption.
 
 Example:
 ```
-curl -H "Content-Type: application/json" -X POST -d '{ "person": "chuck", "type": "bison", "date": "2015-05-01T06:00:00.000Z" }' http://127.0.0.1:8282/consumption
+curl -H "Content-Type: application/json" -X POST -d '{ "person": "chuck", "meat-bar-type": "bison", "date": "2015-05-01T06:00:00.000Z" }' http://127.0.0.1:8282/consumption
 ```
 
 ### GET `/reports/streaks`
