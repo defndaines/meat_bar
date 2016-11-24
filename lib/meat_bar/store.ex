@@ -25,6 +25,18 @@ defmodule MeatBar.Store do
     Repo.all(query)
   end
 
+  @doc "Aggregate consumptions per day, sorted by oldest first."
+  def consumption_per_day do
+    query = """
+      SELECT strftime('%Y-%m', date) AS month, strftime('%Y-%m-%d', date) AS per_day, COUNT(*) AS total
+      FROM consumption
+      GROUP BY 1, 2
+      ORDER BY 1
+    """
+    {:ok, %{rows: results}} = Ecto.Adapters.SQL.query(Repo, query, [])
+    results
+  end
+
   @doc "Track a new consumption record, adding a user if necessary."
   def track_consumption(%{"person" => name, "meat-bar-type" => type, "date" => date}) do
     {:ok, dt} = Ecto.DateTime.cast(date)

@@ -37,13 +37,16 @@ defmodule MeatBar.API do
   namespace :reports do
     namespace :streaks do
       get do
-        json(conn, [])
+        results = MeatBar.Store.consumption_per_day()
+        json(conn, results)
       end
     end
 
     namespace :monthly_peaks do
       get do
-        json(conn, [])
+        peaks = MeatBar.Store.consumption_per_day()
+                |> MeatBar.Report.monthly_peaks()
+        json(conn, peaks)
       end
     end
   end
