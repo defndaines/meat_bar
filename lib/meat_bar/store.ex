@@ -1,13 +1,13 @@
 defmodule MeatBar.Store do
   import Ecto.Query
 
-  alias MeatBar.Repo
-  alias MeatBar.Person
-  alias MeatBar.Consumption
-
   @moduledoc """
   Functions for interacting with the database.
   """
+
+  alias MeatBar.Repo
+  alias MeatBar.Person
+  alias MeatBar.Consumption
 
   @doc "Get the names of all people who have consumed Meat Bars."
   def all_people do
@@ -30,8 +30,8 @@ defmodule MeatBar.Store do
     query = """
       SELECT strftime('%Y-%m', date) AS month, strftime('%Y-%m-%d', date) AS per_day, COUNT(*) AS total
       FROM consumption
-      GROUP BY 1, 2
-      ORDER BY 1
+      GROUP BY month, per_day
+      ORDER BY month
     """
     {:ok, %{rows: results}} = Ecto.Adapters.SQL.query(Repo, query, [])
     results

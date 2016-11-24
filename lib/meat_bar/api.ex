@@ -5,6 +5,7 @@ defmodule MeatBar.API do
   Defines the routes supported by this application.
   """
 
+  # Adds parser which allows route to accept JSON POST.
   before do
     plug Plug.Parsers,
     pass: ["*/*"],
@@ -13,16 +14,19 @@ defmodule MeatBar.API do
   end
 
   namespace :people do
+    desc "All people."
     get do
       json(conn, MeatBar.Store.all_people())
     end
   end
 
   namespace :consumption do
+    desc "All meat bars consumptions."
     get do
       json(conn, MeatBar.Store.all_consumption())
     end
 
+    desc "Adds a meat consumption."
     params do
       requires "person", type: String
       requires "meat-bar-type", type: String
@@ -36,13 +40,20 @@ defmodule MeatBar.API do
 
   namespace :reports do
     namespace :streaks do
+      desc """
+      All streaks of days when more and more meat bars were eaten
+      than the day before.
+      """
       get do
-        results = MeatBar.Store.consumption_per_day()
-        json(conn, results)
+        streaks = MeatBar.Store.consumption_per_day()
+        json(conn, streaks)
       end
     end
 
     namespace :monthly_peaks do
+      desc """
+      For each month, which day of the month has people eat the most bars.
+      """
       get do
         peaks = MeatBar.Store.consumption_per_day()
                 |> MeatBar.Report.monthly_peaks()

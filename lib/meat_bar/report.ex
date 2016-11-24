@@ -1,9 +1,9 @@
 defmodule MeatBar.Report do
   @moduledoc """
-  Functions for generating analyitical reports against consumption data.
+  Functions for generating analytical reports against consumption data.
   """
 
-  @doc ""
+  @doc "For each month, which day of the month has people eat the most bars on."
   def monthly_peaks(data) do
     data
     |> Enum.group_by(fn([month, _, _]) -> month end, fn([_, date, cnt]) -> {date, cnt} end)
