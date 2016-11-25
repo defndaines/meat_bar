@@ -46,26 +46,6 @@ This should expose endpoints such as:
 curl http://127.0.0.1:8282/people
 ```
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add `meat_bar` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:meat_bar, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `meat_bar` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:meat_bar]]
-    end
-    ```
-
 ## API
 
 The following endpoints are supported.
@@ -113,7 +93,11 @@ Example:
 ```
 curl http://127.0.0.1:8282/reports/streaks
 
-TODO: Paste example after route is implemented.
+[ [ "2015-01-01" ]
+, [ "2015-01-02" ]
+, [ "2015-01-03", "2015-01-06", "2015-01-07" ]
+, [ "2015-01-08" ]
+]
 ```
 
 ### GET `/reports/monthly_peaks`

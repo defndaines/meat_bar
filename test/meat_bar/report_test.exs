@@ -21,7 +21,22 @@ defmodule MeatBar.ReportTest do
          ["2015-08", "2015-08-01", 1]]
 
   test "report on streaks" do
-    # streaks = MeatBar.Report.streaks(@data)
+    expected = [["2015-01-01"],
+                ["2015-01-02"],
+                ["2015-01-03", "2015-01-06", "2015-01-07"],
+                ["2015-01-08"],
+                ["2015-01-09"],
+                ["2015-01-10"],
+                ["2015-01-11"],
+                ["2015-01-12"],
+                ["2015-01-13"],
+                ["2015-01-15"],
+                ["2015-01-17"],
+                ["2015-02-01", "2015-03-01"],
+                ["2015-04-01", "2015-05-01"],
+                ["2015-08-01"]]
+    streaks = MeatBar.Report.streaks(@data)
+    assert expected == streaks
   end
 
   test "report on monthlypeaks" do

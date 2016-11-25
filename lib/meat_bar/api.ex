@@ -46,6 +46,7 @@ defmodule MeatBar.API do
       """
       get do
         streaks = MeatBar.Store.consumption_per_day()
+                  |> MeatBar.Report.streaks()
         json(conn, streaks)
       end
     end
