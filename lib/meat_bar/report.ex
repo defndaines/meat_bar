@@ -29,7 +29,7 @@ defmodule MeatBar.Report do
   defp do_streaks([[_, date, cnt] | rest], [{_, prev_cnt} | _] = last, acc) when cnt <= prev_cnt do
     do_streaks(rest, [{date, cnt}], acc ++ [finalize_streak(last)])
   end
-  defp do_streaks([[_, date, cnt] | rest], [{_, prev_cnt} | _] = last, acc) do
+  defp do_streaks([[_, date, cnt] | rest], last, acc) do
     do_streaks(rest, [{date, cnt} | last], acc)
   end
 
@@ -39,7 +39,7 @@ defmodule MeatBar.Report do
   end
 
   defp peak_date(count_tuples) do
-    {peak, _} = Enum.max_by(count_tuples, fn({date, cnt}) -> cnt end)
+    {peak, _} = Enum.max_by(count_tuples, fn({_, cnt}) -> cnt end)
     peak
   end
 end
