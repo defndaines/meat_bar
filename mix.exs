@@ -14,7 +14,7 @@ defmodule MeatBar.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :sqlitex, :sqlite_ecto, :ecto, :csv, :maru],
+    [applications: [:logger, :sqlitex, :sqlite_ecto, :ecto, :maru],
      mod: {MeatBar, []}]
   end
 
@@ -28,7 +28,7 @@ defmodule MeatBar.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:maru, "~> 0.10.5"},
+    [{:maru, "~> 0.11.1"},
      {:csv, "~> 1.4.4"},
      {:sqlite_ecto, "~> 1.1.0"},
      {:distillery, "~> 0.10.1"}]

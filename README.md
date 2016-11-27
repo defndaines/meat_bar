@@ -34,6 +34,13 @@ Run tests from the root directory with:
 mix test
 ```
 
+This currently populates the development database, so if you wish to clean up
+the development version, run:
+```
+mix ecto.drop
+mix ecto.migrate
+```
+
 ### Running Locally
 
 To launch the application along with an interactive shell:
@@ -64,7 +71,7 @@ cp priv/static/meat_bar.sqlite3 rel/meat_bar/
 The release can then be run with:
 ```
 cd rel/meat_bar
-./bin/meat_bar cosole
+./bin/meat_bar console
 ```
 
 ## API
